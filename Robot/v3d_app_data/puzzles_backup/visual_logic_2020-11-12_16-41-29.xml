@@ -1,0 +1,42 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <tab name="init" type="InitTab" active="false" scrollx="773.5" scrolly="610.5" scale="0.9"></tab>
+  <tab name="main" type="MainTab" active="true" scrollx="712.5" scrolly="684.5" scale="0.9">
+    <block xmlns="https://developers.google.com/blockly/xml" type="controls_if" id="TZHK1C0Lqb9%:3i1zx#d" x="-650" y="-310"/>
+    <block xmlns="https://developers.google.com/blockly/xml" type="whenClicked" id="R(F;E5,N,SXvj[tcI}A3" x="-690" y="-210">
+      <mutation xmlns="http://www.w3.org/1999/xhtml" enableifmissed="false"></mutation>
+      <value name="VALUE">
+        <block type="objectList" id="q)tAh;si0d$lCA|9V+.(">
+          <field name="FIELDNAME">__DEFAULT_CAMERA__</field>
+        </block>
+      </value>
+      <statement name="DO">
+        <block type="autoRotateCamera" id="wO6MGgCxu0rjC7Tf4Kc7">
+          <field name="ON_OFF">OFF</field>
+          <value name="SPEED">
+            <shadow type="math_number" id="5MBe;Tr`%c6#Vs-xP,*Y">
+              <field name="NUM">2</field>
+            </shadow>
+          </value>
+        </block>
+      </statement>
+    </block>
+    <block xmlns="https://developers.google.com/blockly/xml" type="bloom" id="~15G(T9?tBS_pCKe3vjc" x="190" y="30">
+      <value name="THRESHOLD">
+        <shadow type="number_slider" id="JNlNH:DSGK+s;($d(Kz.">
+          <field name="NUM" min="0" max="10" step="0.1">0.8</field>
+        </shadow>
+      </value>
+      <value name="STRENGTH">
+        <shadow type="number_slider" id="Bn4l?a{ZpsiV!s*n0WT)">
+          <field name="NUM" min="0" max="10" step="0.1">0.3</field>
+        </shadow>
+      </value>
+      <value name="RADIUS">
+        <shadow type="number_slider" id="Rjnk+;hQYUsE*LIvK5tM">
+          <field name="NUM" min="0" max="10" step="0.1">0.5</field>
+        </shadow>
+      </value>
+    </block>
+  </tab>
+  <editorsettings viewport-x="1012.1999999999998" viewport-y="28" viewport-w="686.8" viewport-h="648.5" viewport-hidden="false" toolbox-library-mode="false" toolbox-minimized-mode="false"></editorsettings>
+</xml>
