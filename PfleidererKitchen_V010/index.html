@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Default</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+
+	</head>
+
+	<body>
+
+		<script type="module">
+
+			import * as THREE from '../build/three.module.js';
+
+			import { OrbitControls } from './jsm/controls/OrbitControls.js';
+			import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
+			import { RGBELoader } from './jsm/loaders/RGBELoader.js';
+			import { RoughnessMipmapper } from './jsm/utils/RoughnessMipmapper.js';
+
+			var container, controls;
+			var camera, scene, renderer;
+
+			init();
+			render();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				scene = new THREE.Scene();
+
+				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.25, 20 );
+
+				// loading the blurred HDR for the scene background
+				new RGBELoader()
+					.setDataType( THREE.UnsignedByteType )
+					.setPath( 'assets/' )
+					.load( 'Kitchen_V010_background.hdr', function ( texture ) {
+
+						var envMap = pmremGenerator.fromEquirectangular( texture ).texture;
+
+						scene.background = envMap;
+
+						texture.dispose();
+						pmremGenerator.dispose();
+
+					} );
+
+				// loading the non blurred HDR as environment for lighting and reflections on objects
+				new RGBELoader()
+					.setDataType( THREE.UnsignedByteType )
+					.setPath( 'assets/' )
+					.load( 'Kitchen_V010_environment.hdr', function ( texture ) {
+
+						var envMap = pmremGenerator.fromEquirectangular( texture ).texture;
+
+						scene.environment = envMap;
+
+						texture.dispose();
+						pmremGenerator.dispose();
+
+			
+						// load an object
+						var loader = new GLTFLoader().setPath( 'assets/' );
+						loader.load( 'Kitchen_V010_static.glb', function ( gltf ) {
+
+							gltf.scene.traverse( function ( child ) {
+
+								if ( child.isMesh ) {
+
+
+							
+
+								}
+
+							} );
+
+
+							scene.add( gltf.scene );
+
+							// initialize render here
+							render();
+
+						} );
+
+						// end load object
+
+							// load another object
+							var loader = new GLTFLoader().setPath( 'assets/' );
+						loader.load( 'Kitchen_V008_Texture.gltf', function ( gltf ) {
+
+							gltf.scene.traverse( function ( child ) {
+
+								if ( child.isMesh ) {
+
+
+							
+
+								}
+
+							} );
+
+
+							scene.add( gltf.scene );
+
+							// initialize render here
+							render();
+
+						} );
+
+						// end load another object
+
+
+					} );
+
+				//render settings
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 1;
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				container.appendChild( renderer.domElement );
+
+				var pmremGenerator = new THREE.PMREMGenerator( renderer );
+				pmremGenerator.compileEquirectangularShader();
+
+				//camera settings
+				controls = new OrbitControls( camera, renderer.domElement );
+				controls.addEventListener( 'change', render );
+				camera.position.set( 0, 1.5, 6 );
+				controls.target.set( 0, 1.5, 0 );
+				controls.minDistance = 4;
+				controls.maxDistance = 9;
+				//controls.enableDamping = true;
+				//controls.dampingFactor = 0.15;	
+				controls.enablePan = false;
+				controls.minPolarAngle = -Math.PI / 2;
+				controls.maxPolarAngle = Math.PI / 2;	
+				controls.minAzimuthAngle = -Math.PI / 3;
+				controls.maxAzimuthAngle = Math.PI / 3;				
+				//controls.autoRotate = true;
+				//controls.autoRotateSpeed = 2;
+
+				controls.update();
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				render();
+
+			}
+
+			function render() {
+
+				renderer.render( scene, camera );
+
+			}
+
+			function animate() {
+ 
+ 				requestAnimationFrame(animate);
+ 				controls.update();
+ 				renderer.render(scene, camera);
+				  
+		    }
+ 
+ 				animate();
+
+		</script>
+
+	</body>
+</html>
