@@ -1,7 +1,0 @@
-<xml xmlns="http://www.w3.org/1999/xhtml">
-  <tab name="init" type="InitTab" active="true" scrollx="773.5" scrolly="610.5" scale="0.9">
-    <block xmlns="https://developers.google.com/blockly/xml" type="initPreloader" id="qO`v-D]9;dhR9+.TToLJ" x="-610" y="-210"/>
-  </tab>
-  <tab name="main" type="MainTab" active="false" scrollx="773.5" scrolly="610.5" scale="0.9"></tab>
-  <editorsettings viewport-x="1012.1999999999998" viewport-y="28" viewport-w="686.8" viewport-h="648.5" viewport-hidden="false" toolbox-library-mode="false" toolbox-minimized-mode="false"></editorsettings>
-</xml>
